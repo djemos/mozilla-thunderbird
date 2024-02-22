@@ -1,3 +1,3 @@
 mozilla-thunderbird (Mozilla Thunderbird mail application)"
 
-This SLKBUILD build mozilla-thunderbird binary included all locales, in one package.
+This SLKBUILD build the latest mozilla-thunderbird binary included all locales, in one package.
