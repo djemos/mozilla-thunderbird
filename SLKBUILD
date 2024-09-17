@@ -113,7 +113,7 @@ build() {
 		cp $startdir/src/${locale}.xpi $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/distribution/extensions/langpack-${locale}\@thunderbird.mozilla.org.xpi
 	done
 	
-	# If MOZ_ALLOW_DOWNGRADE=YES, replace the /usr/bin/thunderbird symlink with a
+# If MOZ_ALLOW_DOWNGRADE=YES, replace the /usr/bin/thunderbird symlink with a
 # shell script that sets the MOZ_ALLOW_DOWNGRADE=1 environment variable so
 # that a detected downgrade does not reset the user profile:
 if [ "$MOZ_ALLOW_DOWNGRADE" = "YES" ]; then
