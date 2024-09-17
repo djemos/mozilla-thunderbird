@@ -6,7 +6,7 @@
 # "https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/fa.xpi"
 
 pkgname=mozilla-thunderbird
-#pkgver=128.2.0esr
+#pkgver=128.2.1esr
 pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-128.2.1esr&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
 #pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-latest&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
 #_majorver=`echo $pkgver | sed "s/\(.*\)\.\(.*\)\.\(.*\)esr/\1esr/"`
