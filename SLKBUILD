@@ -3,54 +3,55 @@
 # creating a package for a new thunderbird version
 # TODO: put the list of locales in a separate file.
 # No fa.xpi package available for download on 23/11/2016
-# "http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/fa.xpi"
+# "https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/fa.xpi"
 
 pkgname=mozilla-thunderbird
-#pkgver=68.6.0
-pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-latest&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
+#pkgver=128.2.0esr
+pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-128.2.1esr&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
+#pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-latest&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
 #_majorver=`echo $pkgver | sed "s/\(.*\)\.\(.*\)\.\(.*\)esr/\1esr/"`
-_majorver=$pkgver
+#_majorver=$pkgver
 pkgrel=1dj
 arch=${arch:-x86_64}
 
-source=("http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/en-US/thunderbird-$pkgver.tar.bz2"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/ar.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/bg.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/cs.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/da.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/de.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/en-US.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/en-GB.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/el.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/es-AR.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/es-ES.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/et.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/fi.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/fr.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/hr.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/hu.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/id.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/it.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/ja.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/ko.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/lt.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/nb-NO.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/nn-NO.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/nl.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/pl.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/pt-BR.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/pt-PT.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/ro.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/ru.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/sk.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/sl.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/sr.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/sv-SE.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/tr.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/uk.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/vi.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/zh-CN.xpi"
-	"http://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/xpi/zh-TW.xpi"
+source=("https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/en-US/thunderbird-$pkgver.tar.bz2"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/ar.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/bg.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/cs.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/da.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/de.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/en-US.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/en-GB.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/el.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/es-AR.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/es-ES.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/et.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/fi.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/fr.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/hr.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/hu.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/id.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/it.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/ja.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/ko.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/lt.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/nb-NO.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/nn-NO.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/nl.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/pl.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/pt-BR.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/pt-PT.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/ro.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/ru.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/sk.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/sl.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/sr.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/sv-SE.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/tr.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/uk.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/vi.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/zh-CN.xpi"
+	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/zh-TW.xpi"
 	"mozilla-thunderbird.desktop"
 	"langpacks.js")
 docs=("readme.txt" "install" "copying" "changelog" "authors" "news" "todo")
@@ -79,17 +80,19 @@ slackdesc=\
 "filters, built-in RSS reader, quick search, and much more."
 ""
 "Visit the Mozilla Thunderbird project online:"
-"  http://www.mozilla.org/projects/thunderbird/"
+"  https://www.mozilla.org/projects/thunderbird/"
 )
 
 
 build() {
+	MOZ_ALLOW_DOWNGRADE=${MOZ_ALLOW_DOWNGRADE:-YES}
+	
 	# extract the thunderbird tarball
 	cd $startdir/src
 	tar xf thunderbird-$pkgver.tar.bz2
 	cd $startdir/src/thunderbird
-	mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver
-	cp -R ./* $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver/
+	mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird
+	cp -R ./* $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/
 	mkdir -p $startdir/pkg/usr/bin
 	mkdir -p $startdir/pkg/usr/share/applications
 	# fix mozilla-thunderbird.desktop
@@ -102,22 +105,44 @@ build() {
 	cp $startdir/src/thunderbird/chrome/icons/default/default32.png $startdir/pkg/usr/share/icons/hicolor/32x32/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default48.png $startdir/pkg/usr/share/icons/hicolor/48x48/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default128.png $startdir/pkg/usr/share/icons/hicolor/128x128/apps/thunderbird.png
-	cp $startdir/src/langpacks.js $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver/defaults/pref/
+	cp $startdir/src/langpacks.js $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/defaults/pref/
 
 	# locales
 	for locale in `basename -a -s ".xpi" $startdir/src/*.xpi`; do
-		mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver/distribution/extensions/
-		cp $startdir/src/${locale}.xpi $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver/distribution/extensions/langpack-${locale}\@thunderbird.mozilla.org.xpi
+		mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/distribution/extensions/
+		cp $startdir/src/${locale}.xpi $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/distribution/extensions/langpack-${locale}\@thunderbird.mozilla.org.xpi
 	done
-	(
-	cd $startdir/pkg/usr/bin
-	ln -sf /usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver/thunderbird thunderbird
-	)
+	
+	# If MOZ_ALLOW_DOWNGRADE=YES, replace the /usr/bin/thunderbird symlink with a
+# shell script that sets the MOZ_ALLOW_DOWNGRADE=1 environment variable so
+# that a detected downgrade does not reset the user profile:
+if [ "$MOZ_ALLOW_DOWNGRADE" = "YES" ]; then
+  rm -f $startdir/pkg/usr/bin/thunderbird
+  cat << EOF > $startdir/pkg/usr/bin/thunderbird
+#!/bin/sh
+#
+# Shell script to start Mozilla Thunderbird.
+#
+# Don't reset the user profile on a detected downgrade:
+export MOZ_ALLOW_DOWNGRADE=1
+
+# Start Thunderbird:
+exec /usr/lib${LIBDIRSUFFIX}/thunderbird/thunderbird "\$@"
+EOF
+  chown root:root $startdir/pkg/usr/bin/thunderbird
+  chmod 755 $startdir/pkg/usr/bin/thunderbird
+fi
+
+# Fix duplicate binary, httpss://bugzilla.mozilla.org/show_bug.cgi?id=658850
+( cd $startdir/pkg/usr/lib$LIBDIRSUFFIX/thunderbird
+  if cmp thunderbird thunderbird-bin ; then
+    ln -sf thunderbird-bin thunderbird
+  fi
+)
 
 	mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
 	(
-	cd $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird-$_majorver
+	cd $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird
 	ln -s ../mozilla/plugins plugins
 	)
 }
- 
