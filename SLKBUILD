@@ -6,15 +6,15 @@
 # "https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/fa.xpi"
 
 pkgname=mozilla-thunderbird
-#pkgver=128.3.0esr
-pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-esr-latest&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
+pkgver=140.0.1esr
+#pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-esr-latest&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
 #pkgver=${pkgver:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=thunderbird-latest&os=linux${LIBDIRSUFFIX}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/thunderbird-\(.*\)\.tar.*|\1|p;q;}')}
 #_majorver=`echo $pkgver | sed "s/\(.*\)\.\(.*\)\.\(.*\)esr/\1esr/"`
 #_majorver=$pkgver
 pkgrel=1dj
 arch=${arch:-x86_64}
 
-source=("https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/en-US/thunderbird-$pkgver.tar.bz2"
+source=("https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-$arch/en-US/thunderbird-$pkgver.tar.xz"
 	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/ar.xpi"
 	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/bg.xpi"
 	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/cs.xpi"
@@ -53,7 +53,8 @@ source=("https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pk
 	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/zh-CN.xpi"
 	"https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/$pkgver/linux-x86_64/xpi/zh-TW.xpi"
 	"mozilla-thunderbird.desktop"
-	"langpacks.js")
+	"langpacks.js"
+	"policies.json")
 docs=("readme.txt" "install" "copying" "changelog" "authors" "news" "todo")
 options=('noextract')
 
@@ -89,7 +90,7 @@ build() {
 	
 	# extract the thunderbird tarball
 	cd $startdir/src
-	tar xf thunderbird-$pkgver.tar.bz2
+	tar xf thunderbird-$pkgver.tar.xz
 	cd $startdir/src/thunderbird
 	mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird
 	cp -R ./* $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/
@@ -98,13 +99,15 @@ build() {
 	# fix mozilla-thunderbird.desktop
 	sed "/Encoding/d;s:/usr/share/pixmaps/thunderbird.png:thunderbird:" $startdir/src/mozilla-thunderbird.desktop > $startdir/src/thunderbird.desktop
 	mv $startdir/src/thunderbird.desktop $startdir/pkg/usr/share/applications/mozilla-thunderbird.desktop
-	mkdir -p $startdir/pkg/usr/share/icons/hicolor/{16x16,22x22,24x24,32x32,48x48,128x128}/apps
+	mkdir -p $startdir/pkg/usr/share/icons/hicolor/{16x16,22x22,24x24,32x32,48x48,64x64,128x128,256x256}/apps
 	cp $startdir/src/thunderbird/chrome/icons/default/default16.png $startdir/pkg/usr/share/icons/hicolor/16x16/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default22.png $startdir/pkg/usr/share/icons/hicolor/22x22/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default24.png $startdir/pkg/usr/share/icons/hicolor/24x24/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default32.png $startdir/pkg/usr/share/icons/hicolor/32x32/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default48.png $startdir/pkg/usr/share/icons/hicolor/48x48/apps/thunderbird.png
+	cp $startdir/src/thunderbird/chrome/icons/default/default64.png $startdir/pkg/usr/share/icons/hicolor/64x64/apps/thunderbird.png
 	cp $startdir/src/thunderbird/chrome/icons/default/default128.png $startdir/pkg/usr/share/icons/hicolor/128x128/apps/thunderbird.png
+	cp $startdir/src/thunderbird/chrome/icons/default/default256.png $startdir/pkg/usr/share/icons/hicolor/256x256/apps/thunderbird.png
 	cp $startdir/src/langpacks.js $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/defaults/pref/
 
 	# locales
@@ -112,6 +115,7 @@ build() {
 		mkdir -p $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/distribution/extensions/
 		cp $startdir/src/${locale}.xpi $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/distribution/extensions/langpack-${locale}\@thunderbird.mozilla.org.xpi
 	done
+	cp $startdir/src/policies.json $startdir/pkg/usr/lib${LIBDIRSUFFIX}/thunderbird/distribution/
 	
 # If MOZ_ALLOW_DOWNGRADE=YES, replace the /usr/bin/thunderbird symlink with a
 # shell script that sets the MOZ_ALLOW_DOWNGRADE=1 environment variable so
@@ -146,4 +150,3 @@ fi
 	ln -s ../mozilla/plugins plugins
 	)
 }
- 
