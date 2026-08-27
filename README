@@ -1,7 +1,5 @@
 mozilla-thunderbird (Mozilla Thunderbird mail application)"
 
-This SLKBUILD build the latest mozilla-thunderbird binary included all locales, in one package.
-
 This SLKBUILD repackage the latest mozilla-thunderbird esr 64 bit including all locales in one package.
 The mozilla-thunderbird.SlackBuild script in 32bit folder build 32-bit and 64-bit Thunderbird esr packages from source including locales, since Thunderbird from version 153 no longer supports 32-bit Linux operating systems.
 # The packages rust, rust-bindgen, cbindgen, cargo-c, cargo-vendor-filterer, gcc-rust, nodejs have to installed from slackware current repos.
